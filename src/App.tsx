@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 import Block from './components/block'
 
@@ -20,6 +20,7 @@ const blockDefArr: BlockDef[] = [
 
 function App() {
     const container = useRef(null)
+    const [activeIndex, setActiveIndex] = useState<number>()
 
     useGSAP(() => {
         const randomTimeArr: number[] = blockDefArr.map(_ => gsap.utils.random(0, 0.3))
@@ -56,7 +57,13 @@ function App() {
         <div className='container' ref={container}>
             <div className='flex flex-wrap gap-16 w-[400px]'>
                 {blockDefArr.map(({ text }, index) => (
-                    <Block key={index} index={index} text={text} />
+                    <Block
+                        key={index}
+                        index={index}
+                        text={text}
+                        active={activeIndex === index}
+                        setActiveIndex={setActiveIndex}
+                    />
                 ))}
             </div>
         </div>

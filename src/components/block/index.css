@@ -4,5 +4,17 @@
     @apply flex;
     @apply rounded-md;
 
-    overflow: visible;
+    &.active,
+    &.active * {
+        @apply border-cyan-300;
+
+        .title {
+            @apply bg-cyan-300;
+        }
+
+        span {
+            @apply text-black;
+            @apply font-extrabold;
+        }
+    }
 }
