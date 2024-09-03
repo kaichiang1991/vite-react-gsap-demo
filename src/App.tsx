@@ -19,7 +19,7 @@ const blockDefArr: BlockDef[] = [
 ]
 
 function App() {
-    const container = useRef(null)
+    const container = useRef<HTMLDivElement>(null)
     const [activeIndex, setActiveIndex] = useState<number>()
 
     useGSAP(() => {
@@ -53,9 +53,44 @@ function App() {
         )
     })
 
+    useGSAP(() => {
+        if (activeIndex === undefined) return // 沒選擇的淡出
+
+        const timeline = gsap.timeline()
+
+        ;[0, 1, 2, 3]
+            .filter(index => index != activeIndex)
+            .map(index => {
+                timeline.to(`.block-component-${index}`, { alpha: 0 }, 0)
+            })
+
+        timeline.eventCallback('onComplete', () => {
+            console.log('oncomplete')
+        })
+        if (container.current) {
+            const containerRect = container.current.getBoundingClientRect()
+            const block: HTMLDivElement = document.querySelector(`.block-component-${activeIndex}`)!
+            const blockRect = block.getBoundingClientRect()
+
+            // 計算移動到正中間的位移
+            const containerCenterX: number = containerRect.left + containerRect.width / 2,
+                moveX: number = containerCenterX - blockRect.x - blockRect.width / 2
+
+            const containerCenterY: number = containerRect.top + containerRect.height / 2,
+                moveY: number = containerCenterY - blockRect.y - blockRect.height / 2
+
+            timeline.call(() => {
+                gsap.to(`.block-component-${activeIndex}`, {
+                    x: moveX,
+                    y: moveY,
+                })
+            })
+        }
+    }, [activeIndex])
+
     return (
-        <div className='container' ref={container}>
-            <div className='flex flex-wrap gap-16 w-[400px]'>
+        <div className='container border-white border py-24 px-10' ref={container}>
+            <div className='flex flex-wrap items-center justify-center gap-16 w-[400px]'>
                 {blockDefArr.map(({ text }, index) => (
                     <Block
                         key={index}

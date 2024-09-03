@@ -16,7 +16,7 @@ export default function Block({
     return (
         <div
             className={`block-component-${index} custom-block w-[130px] h-[190px] p-2 ${
-                active ? 'active' : 'inactive'
+                active ? 'active' : ''
             }`}
             onClick={() => {
                 setActiveIndex(index)

@@ -1,4 +1,5 @@
 .custom-block {
+    position: relative;
     @apply border-white;
     @apply border;
     @apply flex;
