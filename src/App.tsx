@@ -9,7 +9,6 @@ gsap.registerPlugin(useGSAP)
 interface BlockDef {
     text: string
     pos: { x: number; y: number }
-    randomTime?: number
 }
 
 const blockDefArr: BlockDef[] = [
@@ -46,6 +45,9 @@ function App() {
             {
                 scaleY: 1,
                 delay: 1,
+                onComplete: () => {
+                    // TODO: svg動畫插圖
+                },
             }
         )
     })
@@ -53,7 +55,7 @@ function App() {
     return (
         <div className='container' ref={container}>
             <div className='flex flex-wrap gap-16 w-[400px]'>
-                {blockDefArr.map(({ text, pos }, index) => (
+                {blockDefArr.map(({ text }, index) => (
                     <Block key={index} index={index} text={text} />
                 ))}
             </div>
