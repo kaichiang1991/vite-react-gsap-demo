@@ -1,0 +1,8 @@
+.custom-block {
+    @apply border-white;
+    @apply border;
+    @apply flex;
+    @apply rounded-md;
+
+    overflow: visible;
+}
