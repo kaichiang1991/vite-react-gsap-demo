@@ -15,12 +15,13 @@ export default function Block({
 }) {
     return (
         <div
-            className={`block-component-${index} custom-block w-[130px] h-[190px] p-2 ${
+            className={`block-component custom-block w-[130px] h-[190px] p-2 cursor-pointer ${
                 active ? 'active' : ''
             }`}
             onClick={() => {
                 setActiveIndex(index)
             }}
+            data-index={index}
         >
             <div className='w-full h-full custom-block items-center relative border-[3px]'>
                 <Title />
