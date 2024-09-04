@@ -1,0 +1,52 @@
+.point {
+    @apply -translate-y-1;
+
+    &:first-child::after {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: solid white 0.5px;
+        transform: translate(50%, 50%);
+    }
+
+    &:last-child::before {
+        content: '';
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: solid white 0.5px;
+        transform: translate(-50%, 50%);
+    }
+}
+
+.frame {
+    border-style: solid;
+    border-radius: 1rem;
+
+    &.outer {
+        position: absolute;
+        top: 2px;
+        left: 50%;
+        height: 85%;
+        width: 87%;
+        transform: translateX(-50%);
+
+        border-color: rgba(255, 255, 255, 0.3);
+        border-width: 0.5px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &.inner {
+        position: relative;
+        width: 94%;
+        height: 150%;
+        border-color: rgba(255, 255, 255, 1);
+        border-width: 1.5px;
+    }
+}
