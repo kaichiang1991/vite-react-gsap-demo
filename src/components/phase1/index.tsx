@@ -91,7 +91,7 @@ export default function PhaseOne({ nextPhase }: { nextPhase: () => void }) {
                         repeat: 1,
                         ease: 'none',
                         // 因為有repeat, onComplete是在重複結束後才呼叫
-                        onComplete: a => {
+                        onComplete: () => {
                             gsap.timeline()
                                 .to(element, { opacity: 0, duration: 1, delay: 0.5 })
                                 .call(() => nextPhase())
